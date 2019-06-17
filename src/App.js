@@ -1,23 +1,47 @@
-import React from 'react';
+import React from "react";
+import ApolloClient, { gql } from "apollo-boost";
+import { ApolloProvider, Query } from "react-apollo";
+
+const client = new ApolloClient({
+  uri: "https://rickandmortyapi.com/graphql/"
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <ApolloProvider client={client}>
+      <div className="App">
+        <Query
+          query={gql`
+            {
+              characters(page: 1) {
+                info {
+                  count
+                  next
+                  prev
+                  pages
+                }
+                results {
+                  name
+                  id
+                }
+              }
+            }
+          `}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          {({
+            loading,
+            error,
+            data: { characters: { info, results } = {} }
+          }) => {
+            console.log(loading, error, info, results);
+            if (loading) return <p>Loading...</p>;
+            if (error) return <p>Error :(</p>;
+
+            return results.map(({ name, id }) => <p key={id}>{name}</p>);
+          }}
+        </Query>
+      </div>
+    </ApolloProvider>
   );
 }
 
