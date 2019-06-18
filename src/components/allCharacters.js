@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Query } from "react-apollo";
 import { gql } from "apollo-boost";
 import { number } from "prop-types";
@@ -21,7 +21,8 @@ const allCharactersQuery = gql`
   }
 `;
 
-const allCharacters = ({ page, setPage }) => {
+const AllCharacters = () => {
+  const [page, setPage] = useState(1);
   return (
     <>
       <Query variables={{ page }} query={allCharactersQuery}>
@@ -77,8 +78,8 @@ const paginationButtons = (pageCount, setPage, currentPage) => {
   return pageButtons;
 };
 
-allCharacters.propTypes = {
+AllCharacters.propTypes = {
   page: number.isRequired
 };
 
-export default allCharacters;
+export default AllCharacters;

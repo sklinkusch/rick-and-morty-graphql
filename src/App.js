@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 // import of Apollo stuff
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
@@ -10,12 +10,10 @@ const client = new ApolloClient({
 });
 // functional component
 function App() {
-  const [page, setPage] = useState(1);
-
   return (
     <ApolloProvider client={client}>
       <div className="App">
-        <AllCharacters page={page} setPage={setPage} />
+        <AllCharacters />
       </div>
     </ApolloProvider>
   );
