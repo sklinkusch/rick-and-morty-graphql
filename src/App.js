@@ -14,8 +14,10 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div className="App">
-        {/* <AllCharacters /> */}
-        <SingleCharacter />
+        <div className="container">
+          {/* <AllCharacters /> */}
+          <SingleCharacter />
+        </div>
       </div>
     </ApolloProvider>
   );

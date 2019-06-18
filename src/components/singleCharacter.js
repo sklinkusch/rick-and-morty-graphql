@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Query } from 'react-apollo'
 import { gql } from 'apollo-boost';
+import "./singleCharacter.scss";
 
 const SingleCharacterQuery = gql`
 query($page: Int!, $character: String!){
@@ -14,6 +15,11 @@ query($page: Int!, $character: String!){
     results {
       name
       id
+      image
+      status
+      species
+      type
+      gender
     }
   }
 }
@@ -24,7 +30,16 @@ const SingleCharacter = () => {
   const [character, setCharacter] = useState("morty");
   return (
     <>
-      <input type="text" value={character} onChange={(event) => setCharacter(event.target.value)} />
+      <nav className="navbar navbar-expand navbar-dark bg-dark">
+        <a className="navbar-brand" href="./">Rick & Morty Characters</a>
+        <div className="collapse navbar-collapse">
+          <form className="form-inline my-2 my-md-0">
+            <input type="text" defaultValue={character}
+              onChange={(event) => setCharacter(event.target.value)}
+            />
+          </form>
+        </div>
+      </nav>
       <Query variables={{ page, character }} query={SingleCharacterQuery}>
 
         {(
@@ -39,19 +54,31 @@ const SingleCharacter = () => {
           if (loading) return <p>Loading...</p>
           if (error) return <p>Error<span role="img" aria-label="error">👅</span></p>
 
-          next = next ? next : 1;
+          next = next ? next : pages;
           prev = prev ? prev : 1;
           return (
-            <> {count && <span>({count})</span>}
-              {results ? results.map(
-                ({ name, id }) => (
-                  <p key={id}>{name}</p>
-                )
-              ) : (<p>No Results</p>)}
-              {/* Pagination will be here */}
-              <button type="button" onClick={() => setPage(prev)}>Prev</button>
-              <button type="button" onClick={() => setPage(next)}>Next</button>
-              <div>{paginationButton(pages, setPage, next - 1)}</div>
+            <> {count && <p>Your search gave {count} results</p>}
+              <div className="row">
+                {results ? results.map(
+                  ({ name, id, image, status, species, type, gender }) => (
+                    <div key={id} className="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                      <img src={image} alt={name} />
+                      <p className="character-name">{name}</p>
+                      <ul>
+                        <li><span className="italic">species:</span>{species}</li>
+                        {type && (<li><span className="italic">type:</span>{type}</li>)}
+                        {gender && (<li><span className="italic">gender:</span>{gender}</li>)}
+                        {status && (<li><span className="italic">status:</span> {status}</li>)}
+                      </ul>
+                    </div>
+                  )
+                ) : (<p>No Results</p>)}
+              </div>
+              <div>
+                {page === 1 ? (<button type="button" className="btn btn-secondary" disabled>Prev</button>) : (<button type="button" className="btn btn-primary" onClick={() => setPage(prev)}>Prev</button>)}
+                {page === pages ? (<button type="button" className="btn btn-secondary" disabled>Next</button>) : (<button type="button" className="btn btn-primary" onClick={() => setPage(next)}>Next</button>)}
+              </div>
+              <div>{paginationButton(pages, setPage, page)}</div>
             </>
           );
         }}
@@ -63,9 +90,25 @@ const SingleCharacter = () => {
 
 const paginationButton = (pageCount, setPage, currentPage) => {
   const pageButtons = [];
-  for (let i = 1; i <= pageCount; i++) {
+  let start, stop;
+  if (pageCount > 11) {
+    if (currentPage <= 5) {
+      start = 1;
+      stop = 11;
+    } else if (currentPage >= pageCount - 5) {
+      start = pageCount - 10;
+      stop = pageCount;
+    } else {
+      start = currentPage - 5;
+      stop = currentPage + 5;
+    }
+  } else {
+    start = 1;
+    stop = pageCount;
+  }
+  for (let i = start; i <= stop; i++) {
     pageButtons.push(
-      <button className={currentPage === i ? "btn active" : "btn"}
+      <button className={currentPage === i ? "btn active btn-secondary" : "btn btn-primary"}
         key={i}
         onClick={() => setPage(i)}
       >{i}</button>
