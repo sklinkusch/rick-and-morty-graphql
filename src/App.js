@@ -2,6 +2,7 @@ import React from "react";
 // import of Apollo stuff
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
+import SingleCharacter from "./components/singleCharacter";
 // external component
 // import AllCharacters from "./components/allCharacters";
 // Apollo client
@@ -14,6 +15,7 @@ function App() {
     <ApolloProvider client={client}>
       <div className="App">
         {/* <AllCharacters /> */}
+        <SingleCharacter />
       </div>
     </ApolloProvider>
   );
