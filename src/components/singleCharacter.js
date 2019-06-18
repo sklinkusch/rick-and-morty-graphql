@@ -20,7 +20,7 @@ const SingleCharacter = () => {
   const [character, setCharacter] = useState("morty");
   return (
     <>
-      <input type="text" />
+      <input type="text" value={character} onChange={(event) => setCharacter(event.target.value)} />
       <Query variables={{ character }} query={SingleCharacterQuery}>
 
         {(
@@ -36,11 +36,11 @@ const SingleCharacter = () => {
           if (error) return <p>Error👅</p>
           return (
             <>
-              {results.map(
+              {results ? results.map(
                 ({ name, id }) => (
                   <p key={id}>{name}</p>
                 )
-              )}
+              ) : (<p>No Results</p>)}
             </>
           );
         }}
