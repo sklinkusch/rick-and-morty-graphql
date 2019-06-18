@@ -90,29 +90,62 @@ const SingleCharacter = () => {
 
 const paginationButton = (pageCount, setPage, currentPage) => {
   const pageButtons = [];
-  let start, stop;
+  let beginStart, beginStop;
+  let endStart, endStop;
   if (pageCount > 11) {
     if (currentPage <= 5) {
-      start = 1;
-      stop = 11;
+      beginStart = null;
+      beginStop = 1;
+      endStart = 12;
+      endStop = pageCount - 2;
     } else if (currentPage >= pageCount - 5) {
-      start = pageCount - 10;
-      stop = pageCount;
+      beginStart = 2;
+      beginStop = currentPage - 5;
+      endStart = pageCount;
+      endStop = null;
     } else {
-      start = currentPage - 5;
-      stop = currentPage + 5;
+      beginStart = 3;
+      beginStop = currentPage - 5;
+      endStart = currentPage + 5;
+      endStop = pageCount - 2;
     }
   } else {
-    start = 1;
-    stop = pageCount;
+    beginStart = null;
+    beginStop = 1;
+    endStart = pageCount;
+    endStop = null;
   }
-  for (let i = start; i <= stop; i++) {
+  if (beginStart) {
+    for (let i = 1; i <= beginStart; i++) {
+      pageButtons.push(
+        <button className="btn btn-primary"
+          key={i}
+          onClick={() => setPage(i)}
+        >{i}</button>
+      );
+    }
+    pageButtons.push(
+      <button className="btn btn-secondary" disabled>...</button>
+    );
+  }
+  for (let i = beginStop; i <= endStart; i++) {
     pageButtons.push(
       <button className={currentPage === i ? "btn active btn-secondary" : "btn btn-primary"}
         key={i}
         onClick={() => setPage(i)}
       >{i}</button>
     );
+  }
+  if (endStop) {
+    pageButtons.push(<button className="btn btn-secondary" disabled>...</button>)
+    for (let i = endStop; i <= pageCount; i++) {
+      pageButtons.push(
+        <button className="btn btn-primary"
+          key={i}
+          onClick={() => setPage(i)}
+        >{i}</button>
+      );
+    }
   }
   console.log(pageButtons)
   return pageButtons
