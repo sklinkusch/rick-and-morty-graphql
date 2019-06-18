@@ -33,9 +33,9 @@ const SingleCharacter = () => {
         ) => {
           console.log(loading, error, results);
           if (loading) return <p>Loading...</p>
-          if (error) return <p>Error👅</p>
+          if (error) return <p>Error<span role="img" aria-label="error">👅</span></p>
           return (
-            <>
+            <> {info.count && <span>({info.count})</span>}
               {results ? results.map(
                 ({ name, id }) => (
                   <p key={id}>{name}</p>
