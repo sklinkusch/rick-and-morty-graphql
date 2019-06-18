@@ -125,7 +125,7 @@ const paginationButton = (pageCount, setPage, currentPage) => {
       );
     }
     pageButtons.push(
-      <button className="btn btn-secondary" disabled>...</button>
+      <button className="btn btn-secondary" disabled key="start">...</button>
     );
   }
   for (let i = beginStop; i <= endStart; i++) {
@@ -137,7 +137,7 @@ const paginationButton = (pageCount, setPage, currentPage) => {
     );
   }
   if (endStop) {
-    pageButtons.push(<button className="btn btn-secondary" disabled>...</button>)
+    pageButtons.push(<button className="btn btn-secondary" key="end" disabled>...</button>)
     for (let i = endStop; i <= pageCount; i++) {
       pageButtons.push(
         <button className="btn btn-primary"
