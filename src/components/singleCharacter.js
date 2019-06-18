@@ -57,7 +57,7 @@ const SingleCharacter = () => {
           next = next ? next : pages;
           prev = prev ? prev : 1;
           return (
-            <> {count && <p>Your search gave {count} results</p>}
+            <> {count && <p>Your search gave {count} results on {pages} pages.</p>}
               <div className="row">
                 {results ? results.map(
                   ({ name, id, image, status, species, type, gender }) => (
