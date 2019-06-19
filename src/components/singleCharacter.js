@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Query } from 'react-apollo'
 import { gql } from 'apollo-boost';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand } from 'reactstrap';
 import "./singleCharacter.scss";
 
 const SingleCharacterQuery = gql`
@@ -31,18 +32,20 @@ query($page: Int!, $character: String!){
 const SingleCharacter = () => {
   const [page, setPage] = useState(1);
   const [character, setCharacter] = useState("morty");
+  const [isOpen, toggle] = useState(false);
   return (
     <>
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <a className="navbar-brand" href="./">Rick & Morty Characters</a>
-        <div className="collapse navbar-collapse">
+      <Navbar color="dark" dark expand="md">
+        <NavbarBrand href="./">Rick & Morty Characters</NavbarBrand>
+        <NavbarToggler onClick={() => toggle(!isOpen)} />
+        <Collapse isOpen={isOpen} navbar>
           <form className="form-inline my-2 my-md-0">
             <input type="text" defaultValue={character}
               onChange={(event) => setCharacter(event.target.value)}
             />
           </form>
-        </div>
-      </nav>
+        </Collapse>
+      </Navbar>
       <Query variables={{ page, character }} query={SingleCharacterQuery}>
 
         {(
