@@ -20,6 +20,9 @@ query($page: Int!, $character: String!){
       species
       type
       gender
+      location {
+        name
+      }
     }
   }
 }
@@ -60,7 +63,7 @@ const SingleCharacter = () => {
             <> {count && <p>Your search gave {count} results on {pages} pages.</p>}
               <div className="row">
                 {results ? results.map(
-                  ({ name, id, image, status, species, type, gender }) => (
+                  ({ name, id, image, status, species, type, gender, location }) => (
                     <div key={id} className="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                       <img src={image} alt={name} />
                       <p className="character-name">{name}</p>
@@ -68,6 +71,7 @@ const SingleCharacter = () => {
                         <li><span className="italic">species:</span>{species}</li>
                         {type && (<li><span className="italic">type:</span>{type}</li>)}
                         {gender && (<li><span className="italic">gender:</span>{gender}</li>)}
+                        <li><span className="italic">location:</span>{location.name}</li>
                         {status && (<li><span className="italic">status:</span> {status}</li>)}
                       </ul>
                     </div>
