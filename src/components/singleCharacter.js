@@ -92,22 +92,22 @@ const paginationButton = (pageCount, setPage, currentPage) => {
   const pageButtons = [];
   let beginStart, beginStop;
   let endStart, endStop;
-  if (pageCount > 11) {
+  if (pageCount > 15) {
     if (currentPage <= 5) {
       beginStart = null;
       beginStop = 1;
       endStart = 12;
-      endStop = pageCount - 2;
+      endStop = pageCount - 1;
     } else if (currentPage >= pageCount - 5) {
       beginStart = 2;
       beginStop = currentPage - 5;
       endStart = pageCount;
       endStop = null;
     } else {
-      beginStart = 3;
+      beginStart = 2;
       beginStop = currentPage - 5;
       endStart = currentPage + 5;
-      endStop = pageCount - 2;
+      endStop = pageCount - 1;
     }
   } else {
     beginStart = null;
