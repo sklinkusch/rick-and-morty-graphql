@@ -56,7 +56,7 @@ const SingleCharacter = () => {
             } = {}
           }
         ) => {
-          console.log(loading, error, results);
+          // console.log(loading, error, results);
           if (loading) return <p>Loading...</p>
           if (error) return <p>Error<span role="img" aria-label="error">👅</span></p>
 
@@ -157,7 +157,7 @@ const paginationButton = (pageCount, setPage, currentPage) => {
       );
     }
   }
-  console.log(pageButtons)
+  // console.log(pageButtons)
   return pageButtons
 }
 
