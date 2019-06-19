@@ -13,9 +13,15 @@ img {
 
 ul li {
   list-style-type: none;
+  position: relative;
+  right: 25px;
 }
 
 .italic {
   font-style: italic;
 }
 
+.btn-group {
+  margin: auto;
+  margin-bottom: 10px;
+}

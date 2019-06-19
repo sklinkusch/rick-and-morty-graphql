@@ -78,11 +78,14 @@ const SingleCharacter = () => {
                   )
                 ) : (<p>No Results</p>)}
               </div>
-              <div>
-                {page === 1 ? (<button type="button" className="btn btn-secondary" disabled>Prev</button>) : (<button type="button" className="btn btn-primary" onClick={() => setPage(prev)}>Prev</button>)}
-                {page === pages ? (<button type="button" className="btn btn-secondary" disabled>Next</button>) : (<button type="button" className="btn btn-primary" onClick={() => setPage(next)}>Next</button>)}
+              <div className="btn-toolbar" role="toolbar" aria-label="allPagination">
+                <div className="btn-group mr-2" role="group" aria-label="prevnext">
+                  {page === 1 ? (<button type="button" className="btn btn-secondary" disabled>Prev</button>) : (<button type="button" className="btn btn-primary" onClick={() => setPage(prev)}>Prev</button>)}
+                  {page === pages ? (<button type="button" className="btn btn-secondary" disabled>Next</button>) : (<button type="button" className="btn btn-primary" onClick={() => setPage(next)}>Next</button>)}
+                </div>
+
+                <div className="btn-group" role="group" aria-label="pagination">{paginationButton(pages, setPage, page)}</div>
               </div>
-              <div>{paginationButton(pages, setPage, page)}</div>
             </>
           );
         }}
