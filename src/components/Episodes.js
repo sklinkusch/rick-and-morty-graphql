@@ -63,7 +63,22 @@ export default function Episodes() {
           next = next ? next : pages;
           prev = prev ? prev : 1;
           return (
-            <>
+            <>{results ? (<table className="table table-dark">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Name</th>
+                  <th>Aired on</th>
+                </tr>
+              </thead>
+              <tbody>
+                {results.map(episode => <tr key={episode.key}>
+                  <th>{episode.id}</th>
+                  <td>{episode.name}</td>
+                  <td>{episode.air_date}</td>
+                </tr>)}
+              </tbody>
+            </table>) : <div>No data</div>}
               <div>
                 {paginationButton(pages, setPage, page, width)}
               </div>
