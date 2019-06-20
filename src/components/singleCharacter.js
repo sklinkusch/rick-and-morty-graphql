@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Query } from 'react-apollo'
 import { gql } from 'apollo-boost';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand } from 'reactstrap';
@@ -33,6 +33,13 @@ const SingleCharacter = () => {
   const [page, setPage] = useState(1);
   const [character, setCharacter] = useState("morty");
   const [isOpen, toggle] = useState(false);
+  const [width, setWidth] = useState(null);
+  useEffect(
+    () => {
+      setWidth(window.innerWidth);
+      window.addEventListener('resize', () => setWidth(window.innerWidth));
+    }, []
+  )
   return (
     <>
       <Navbar color="dark" dark expand="md">
@@ -81,13 +88,13 @@ const SingleCharacter = () => {
                   )
                 ) : (<p>No Results</p>)}
               </div>
-              <div className="btn-toolbar" role="toolbar" aria-label="allPagination">
-                <div className="btn-group mr-2" role="group" aria-label="prevnext">
-                  {page === 1 ? (<button type="button" className="btn btn-secondary" disabled>Prev</button>) : (<button type="button" className="btn btn-primary" onClick={() => setPage(prev)}>Prev</button>)}
-                  {page === pages ? (<button type="button" className="btn btn-secondary" disabled>Next</button>) : (<button type="button" className="btn btn-primary" onClick={() => setPage(next)}>Next</button>)}
-                </div>
+              {/* <div className="btn-group mr-2" role="group" aria-label="prevnext"> */}
+              {page === 1 ? (<button type="button" className="btn btn-secondary" disabled>Prev</button>) : (<button type="button" className="btn btn-primary" onClick={() => setPage(prev)}>Prev</button>)}
+              {page === pages ? (<button type="button" className="btn btn-secondary" disabled>Next</button>) : (<button type="button" className="btn btn-primary" onClick={() => setPage(next)}>Next</button>)}
+              {/* </div> */}
 
-                <div className="btn-group" role="group" aria-label="pagination">{paginationButton(pages, setPage, page)}</div>
+              <div>
+                {paginationButton(pages, setPage, page, width)}
               </div>
             </>
           );
@@ -98,26 +105,40 @@ const SingleCharacter = () => {
   )
 }
 
-const paginationButton = (pageCount, setPage, currentPage) => {
+const paginationButton = (pageCount, setPage, currentPage, width) => {
   const pageButtons = [];
   let beginStart, beginStop;
   let endStart, endStop;
-  if (pageCount > 15) {
-    if (currentPage <= 5) {
+  let maxSide, maxMain, maxTotal;
+  if (width > 768) {
+    maxTotal = 15;
+    maxMain = 5;
+    maxSide = 2;
+  } else if (width > 576) {
+    maxTotal = 11;
+    maxMain = 3;
+    maxSide = 2;
+  } else {
+    maxTotal = 7;
+    maxMain = 2;
+    maxSide = 1;
+  }
+  if (pageCount > maxTotal) {
+    if (currentPage <= maxMain) {
       beginStart = null;
       beginStop = 1;
-      endStart = 12;
-      endStop = pageCount - 1;
-    } else if (currentPage >= pageCount - 5) {
-      beginStart = 2;
-      beginStop = currentPage - 5;
+      endStart = 2 * maxMain + 1;
+      endStop = pageCount + 1 - maxSide;
+    } else if (currentPage >= pageCount - maxMain) {
+      beginStart = maxSide;
+      beginStop = currentPage - maxMain;
       endStart = pageCount;
       endStop = null;
     } else {
-      beginStart = 2;
-      beginStop = currentPage - 5;
-      endStart = currentPage + 5;
-      endStop = pageCount - 1;
+      beginStart = maxSide;
+      beginStop = currentPage - maxMain;
+      endStart = currentPage + maxMain;
+      endStop = pageCount + 1 - maxSide;
     }
   } else {
     beginStart = null;
