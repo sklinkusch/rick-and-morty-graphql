@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d0c777e6c2f695a2a900e6f8b823554c",
+    "revision": "bd5a90d6b036716fd2f1cf8c8ee429e1",
     "url": "/rick-and-morty-graphql-2/index.html"
   },
   {
-    "revision": "5e1d8db4419b0043d356",
+    "revision": "1903eb8fa0330d0daf22",
     "url": "/rick-and-morty-graphql-2/static/css/2.266e55a5.chunk.css"
   },
   {
-    "revision": "270b56a384bd8a61ce9c",
+    "revision": "0b54a076d32f53a404d1",
     "url": "/rick-and-morty-graphql-2/static/css/main.41923829.chunk.css"
   },
   {
-    "revision": "5e1d8db4419b0043d356",
-    "url": "/rick-and-morty-graphql-2/static/js/2.0a9e0a03.chunk.js"
+    "revision": "1903eb8fa0330d0daf22",
+    "url": "/rick-and-morty-graphql-2/static/js/2.428d200b.chunk.js"
   },
   {
-    "revision": "270b56a384bd8a61ce9c",
-    "url": "/rick-and-morty-graphql-2/static/js/main.29403768.chunk.js"
+    "revision": "0b54a076d32f53a404d1",
+    "url": "/rick-and-morty-graphql-2/static/js/main.95b79661.chunk.js"
   },
   {
     "revision": "d887e827f8affde0eca9",
