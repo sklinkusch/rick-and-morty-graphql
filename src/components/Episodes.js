@@ -64,7 +64,6 @@ export default function Episodes() {
           prev = prev ? prev : 1;
           return (
             <>
-              <table className="table table-dark"></table>
               <div>
                 {paginationButton(pages, setPage, page, width)}
               </div>
