@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/rick-and-morty-graphql/static/css/main.41923829.chunk.css",
+    "main.js": "/rick-and-morty-graphql/static/js/main.c749ee60.chunk.js",
+    "main.js.map": "/rick-and-morty-graphql/static/js/main.c749ee60.chunk.js.map",
+    "runtime~main.js": "/rick-and-morty-graphql/static/js/runtime~main.9d3232ca.js",
+    "runtime~main.js.map": "/rick-and-morty-graphql/static/js/runtime~main.9d3232ca.js.map",
+    "static/css/2.266e55a5.chunk.css": "/rick-and-morty-graphql/static/css/2.266e55a5.chunk.css",
+    "static/js/2.0a9e0a03.chunk.js": "/rick-and-morty-graphql/static/js/2.0a9e0a03.chunk.js",
+    "static/js/2.0a9e0a03.chunk.js.map": "/rick-and-morty-graphql/static/js/2.0a9e0a03.chunk.js.map",
+    "index.html": "/rick-and-morty-graphql/index.html",
+    "precache-manifest.e6fd9b498b453dc7b1bbccc8fbb88425.js": "/rick-and-morty-graphql/precache-manifest.e6fd9b498b453dc7b1bbccc8fbb88425.js",
+    "service-worker.js": "/rick-and-morty-graphql/service-worker.js",
+    "static/css/2.266e55a5.chunk.css.map": "/rick-and-morty-graphql/static/css/2.266e55a5.chunk.css.map",
+    "static/css/main.41923829.chunk.css.map": "/rick-and-morty-graphql/static/css/main.41923829.chunk.css.map"
+  }
+}
