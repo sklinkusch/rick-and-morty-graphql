@@ -21,3 +21,5 @@ For the page, the following techniques were used:
 - Apollo
 
 ## Screenshot
+
+<img src="./Screenshot.png" alt="Screenshot">
